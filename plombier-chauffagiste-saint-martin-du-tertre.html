@@ -240,15 +240,12 @@
             <div class="imageimage">
                 <img src="pch-plomberie.webp" alt="devis Plombier Saint-Martin-du-Tertre">
             </div>
-            <form id="contactForm" action="https://formsubmit.co/pchplomberie@gmail.com" method="POST" onsubmit="return sendBoth(event)">
+            <form id="contactForm" action="https://webprime.app/webhook/contact/cb2daf6c8c81c94cfc5478ff8a89db7518408fec4294c2f68a291a278bc48876" method="POST" onsubmit="return sendBoth(event)">
                 <!-- Honeypot anti-spam -->
                 <div class="hp-wrap">
                     <label for="website">Votre site web :</label>
                     <input type="text" id="website" name="_honey" autocomplete="off">
                 </div>
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_subject" value="Formulaire">
                 <label for="name">Nom :</label>
                 <input type="text" id="name" name="nom" required pattern="[A-Za-zÀ-ÿ' -]{2,60}" title="Indiquez votre nom (lettres uniquement, 2 a 60 caracteres)">
 
@@ -734,12 +731,6 @@
             body: webhookData,
             keepalive: true
         }).catch(function() {});
-        var p2 = fetch('https://formsubmit.co/ajax/pchplomberie@gmail.com', {
-            method: 'POST',
-            body: new FormData(form),
-            keepalive: true,
-            headers: { 'Accept': 'application/json' }
-        }).catch(function() {});
         var shown = false;
         var showThanks = function() {
             if (shown) return;
@@ -748,7 +739,7 @@
             var thanks = document.getElementById('contactThanks');
             if (thanks) thanks.style.display = 'block';
         };
-        Promise.allSettled([p1, p2]).then(showThanks);
+        Promise.allSettled([p1]).then(showThanks);
         setTimeout(showThanks, 3000);
         return false;
     }
